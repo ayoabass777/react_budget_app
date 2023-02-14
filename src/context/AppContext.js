@@ -60,7 +60,18 @@ export const AppReducer = (state, action) => {
         case 'SET_BUDGET':
             action.type = "DONE";
             state.budget = action.payload;
-
+            
+            
+            if(state.budget>20000){
+                alert('you have exceeded the budget limit')
+            }
+            const totalExpenses = state.expenses.reduce((total, item) => {
+                return (total = total + item.cost);
+            }, 0);
+            if (state.budget< totalExpenses){
+                alert(`the value cannot exceed remaining fund`)
+               }
+            
             return {
                 ...state,
             };
@@ -86,6 +97,7 @@ const initialState = {
         { id: "Human Resource", name: 'Human Resource', cost: 40 },
         { id: "IT", name: 'IT', cost: 500 },
     ],
+    totalExpense: 0,
     currency: '£'
 };
 
